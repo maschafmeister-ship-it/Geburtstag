@@ -55,7 +55,7 @@ button:active{transform:scale(.97)}
 .choice-question{font-family:Georgia,serif;font-size:clamp(24px,6vw,34px);line-height:1.35;margin:28px 0 18px}
 .choice-wrap{position:relative;width:min(100%,460px);min-height:190px;margin:0 auto}
 .choice-btn{display:block;width:min(330px,88%);margin:12px auto}
-#noGerman{position:relative;transition:transform .14s ease}
+#noGerman{position:fixed;right:18px;top:18px;z-index:20;margin:0;transform:rotate(8deg);transition:left .12s ease,top .12s ease,transform .12s ease}
 .spanish-note{font-family:Georgia,"Times New Roman",serif;color:var(--ink);font-size:clamp(25px,6vw,36px);line-height:1.35;margin-bottom:26px;letter-spacing:-.02em}.spanish-note .accent{display:block;color:var(--rose);font-size:.72em;font-style:italic;margin-top:12px;letter-spacing:.01em}
 
 
@@ -122,6 +122,13 @@ linear-gradient(160deg,#fffdf7,#fff4ef)}
   }
   #birthday h1{font-size:clamp(31px,9.5vw,44px)}
   #birthday img{max-height:35svh}
+
+  #noGerman{
+    right:12px;
+    top:12px;
+    max-width:150px;
+    transform:rotate(8deg);
+  }
 }
 @media (max-width: 370px){
   .intro-only{font-size:18px}
@@ -181,7 +188,6 @@ linear-gradient(160deg,#fffdf7,#fff4ef)}
 
 <section class="screen">
  <div class="card">
-  <img src="kuscheln.png" alt="Zwei Otter kuscheln">
   <p>Okay …</p>
   <h1>Vielleicht bist du tatsächlich etwas ganz Besonderes.</h1>
   <button onclick="next()">Weiter</button>
@@ -319,12 +325,13 @@ function launchConfetti(){
 function resetNoButton(){
  const b=document.getElementById('noGerman');
  if(!b) return;
- b.style.position='relative';
+ b.style.position='fixed';
  b.style.left='';
- b.style.top='';
- b.style.margin='12px auto';
- b.style.zIndex='';
- b.style.transform='';
+ b.style.right=window.innerWidth<=480?'12px':'18px';
+ b.style.top=window.innerWidth<=480?'12px':'18px';
+ b.style.margin='0';
+ b.style.zIndex='20';
+ b.style.transform='rotate(8deg)';
  noAttempts=0;
 }
 function show(n){
@@ -350,22 +357,33 @@ function runAway(e){
  const b=document.getElementById('noGerman');
  const rect=b.getBoundingClientRect();
  noAttempts++;
- const pad=18;
+
+ const pad=12;
  const maxX=Math.max(pad,window.innerWidth-b.offsetWidth-pad);
  const maxY=Math.max(pad,window.innerHeight-b.offsetHeight-pad);
- const minJump=Math.min(110 + noAttempts*85, Math.max(140,window.innerWidth*.48));
- let x,y,tries=0;
+
+ const px = e?.clientX ?? (rect.left + rect.width/2);
+ const py = e?.clientY ?? (rect.top + rect.height/2);
+
+ let x=pad,y=pad,tries=0;
  do{
    x=pad+Math.random()*(maxX-pad);
    y=pad+Math.random()*(maxY-pad);
    tries++;
- }while(Math.hypot(x-rect.left,y-rect.top)<minJump && tries<40);
+ }while(
+   (
+     Math.hypot(x-rect.left,y-rect.top) < Math.min(220,window.innerWidth*.52) ||
+     Math.hypot(x-px,y-py) < Math.min(180,window.innerWidth*.42)
+   ) && tries<60
+ );
+
  b.style.position='fixed';
+ b.style.right='auto';
  b.style.left=x+'px';
  b.style.top=y+'px';
  b.style.margin='0';
  b.style.zIndex='20';
- b.style.transform='rotate('+((Math.random()*10)-5)+'deg)';
+ b.style.transform='rotate('+((Math.random()*24)-12)+'deg)';
 }
 function showSpanish(){
  const target=document.getElementById('spanishIntro');
