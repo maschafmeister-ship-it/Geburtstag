@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Für etwas ganz Besonderes 🦦</title>
+<style>
+:root{--ink:#3d2d25;--rose:#c95f7d;--cream:#fffaf5;--soft:#f4e8dd}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(160deg,#fff,#fff7f1);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);overflow:hidden}
+.screen{display:none;min-height:100svh;padding:28px 22px 34px;align-items:center;justify-content:center;text-align:center}
+.screen.active{display:flex;animation:fade .55s ease}
+.card{width:min(100%,520px)}
+img{display:block;max-width:100%;max-height:48svh;margin:0 auto 22px;border-radius:24px}
+h1{font-size:clamp(27px,7vw,42px);line-height:1.08;margin:0 0 16px}
+p{font-size:clamp(18px,4.8vw,23px);line-height:1.45;margin:10px 0}
+.small{font-size:14px;opacity:.65}
+.heart{color:var(--rose)}
+button{border:0;border-radius:999px;background:var(--ink);color:white;padding:14px 25px;font-size:17px;font-weight:700;margin-top:20px;box-shadow:0 8px 22px #3d2d2522}
+button:active{transform:scale(.97)}
+.ghost{background:#fff;color:var(--ink);border:1px solid #e5d8ce}
+.special{font-family:Georgia,serif;font-style:italic;color:var(--rose);font-size:1.15em}
+#teaseBtn{position:relative;transition:transform .18s ease}
+.loader{font-size:42px;letter-spacing:8px;animation:pulse 1s infinite}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes pulse{50%{opacity:.25}}
+</style>
+</head>
+<body>
+
+<section class="screen active">
+ <div class="card">
+  <img src="sideeye.png" alt="Skeptischer Otter mit Krone">
+  <h1>Oh nein …</h1>
+  <p>nicht schon wieder ein QR-Code.</p>
+  <button onclick="next()">Weiter</button>
+ </div>
+</section>
+
+<section class="screen">
+ <div class="card">
+  <p>Keine Sorge.</p>
+  <h1>Diesmal bekommst du nicht meine Telefonnummer.</h1>
+  <button onclick="next()">Weiter</button>
+ </div>
+</section>
+
+<section class="screen">
+ <div class="card">
+  <p>Du erinnerst dich vielleicht an den letzten.</p>
+  <p>Damals wollte ein äußerst mysteriöser Barkeeper dir seine Nummer nicht einfach wie ein normaler Mensch geben.</p>
+  <p>Stattdessen bekamst du den <b>exklusiven WhatsApp-QR-Code.</b></p>
+  <button onclick="next()">Natürlich</button>
+ </div>
+</section>
+
+<section class="screen">
+ <div class="card">
+  <img src="besonders.png" alt="Zwei kuschelnde Otter">
+  <p class="special">Weil du etwas Besonderes bist.</p>
+  <p>Etwas ganz Besonderes.</p>
+  <p><b>Nicht so wie die anderen Frauen.</b></p>
+  <p class="small">Zumindest wurde dir das so erzählt.</p>
+  <button id="teaseBtn" onclick="tease()">Weiter</button>
+ </div>
+</section>
+
+<section class="screen">
+ <div class="card">
+  <img src="sideeye.png" alt="Side-Eye-Otter">
+  <h1>Du bist aber auch leicht zu beschäftigen.</h1>
+  <p class="small">Okay, jetzt darfst du wirklich weiter.</p>
+  <button onclick="next()">Na endlich</button>
+ </div>
+</section>
+
+<section class="screen">
+ <div class="card">
+  <img src="kuscheln.png" alt="Zwei Otter kuscheln">
+  <p>Okay …</p>
+  <h1>Vielleicht bist du tatsächlich etwas ganz Besonderes.</h1>
+  <button onclick="next()">Weiter</button>
+ </div>
+</section>
+
+<section class="screen">
+ <div class="card">
+  <img src="kuscheln.png" alt="Zwei Otter kuscheln">
+  <h1>Aber das meine ich diesmal ernst.</h1>
+  <p>Ich bin ziemlich froh, dass du damals diesen bescheuerten QR-Code gescannt hast.</p>
+  <p class="special">Te quiero mucho, mucho, mucho. <span class="heart">♥</span></p>
+  <button onclick="next()">Weiter</button>
+ </div>
+</section>
+
+<section class="screen">
+ <div class="card">
+  <p>Ach ja …</p>
+  <h1>Dein Geburtstagsgeschenk. 🎁</h1>
+  <button onclick="gift()">Wo ist es?</button>
+ </div>
+</section>
+
+<section class="screen" id="loading">
+ <div class="card">
+  <img src="aufmerksamkeit.png" alt="Otter liegt auf einem schlafenden Otter">
+  <p>Geschenk wird gesucht …</p>
+  <div class="loader">•••</div>
+ </div>
+</section>
+
+<section class="screen">
+ <div class="card">
+  <h1>… in Deutschland. 🇩🇪</h1>
+  <p>Das mit dem Ausland hast du wirklich hervorragend organisiert.</p>
+  <button onclick="next()">Okay 😌</button>
+ </div>
+</section>
+
+<section class="screen">
+ <div class="card">
+  <img src="kuscheln.png" alt="Zwei kuschelnde Otter">
+  <h1>Feliz cumpleaños, princesa. 👑🦦</h1>
+  <p>Das richtige Geschenk kommt noch.</p>
+  <p class="small">Hier kommt später deine persönliche Abschlussnachricht hin.</p>
+  <p class="heart">♥</p>
+ </div>
+</section>
+
+<script>
+const screens=[...document.querySelectorAll('.screen')];
+let current=0, tries=0;
+function show(n){
+ screens[current].classList.remove('active');
+ current=n; screens[current].classList.add('active');
+}
+function next(){ if(current<screens.length-1) show(current+1); }
+function tease(){
+ tries++;
+ const b=document.getElementById('teaseBtn');
+ if(tries<3){
+   const x=(Math.random()*140)-70, y=(Math.random()*70)-35;
+   b.style.transform=`translate(${x}px,${y}px)`;
+   b.textContent=tries===1?'Fast …':'Noch einmal?';
+ } else next();
+}
+function gift(){
+ show(current+1);
+ setTimeout(()=>show(current+1),2300);
+}
+</script>
+</body>
+</html>
