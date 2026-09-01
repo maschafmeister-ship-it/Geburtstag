@@ -11,7 +11,7 @@ body{margin:0;background:linear-gradient(160deg,#fff,#fff7f1);font-family:system
 .screen{display:none;min-height:100svh;padding:28px 22px 34px;align-items:center;justify-content:center;text-align:center}
 .screen.active{display:flex;animation:fade .55s ease}
 .card{width:min(100%,520px)}
-img{display:block;max-width:100%;max-height:48svh;margin:0 auto 22px;border-radius:24px}
+img{display:block;max-width:100%;max-height:48svh;margin:0 auto 22px}
 h1{font-size:clamp(27px,7vw,42px);line-height:1.08;margin:0 0 16px}
 p{font-size:clamp(18px,4.8vw,23px);line-height:1.45;margin:10px 0}
 .small{font-size:14px;opacity:.65}
@@ -20,11 +20,12 @@ button{border:0;border-radius:999px;background:var(--ink);color:white;padding:14
 button:active{transform:scale(.97)}
 .ghost{background:#fff;color:var(--ink);border:1px solid #e5d8ce}
 .special{font-family:Georgia,serif;font-style:italic;color:var(--rose);font-size:1.15em}
+.spanish{font-family:Georgia,serif;font-style:italic;color:var(--rose);font-size:clamp(32px,8.8vw,52px);line-height:1.12;margin:24px 0}
 #teaseBtn{position:relative;transition:transform .18s ease}
 .loader{font-size:42px;letter-spacing:8px;animation:pulse 1s infinite}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes pulse{50%{opacity:.25}}
-</style>
+.poem-intro{font-family:Georgia,serif;font-size:clamp(19px,5vw,27px);line-height:1.55}.poem{font-family:Georgia,serif;font-size:clamp(20px,5.2vw,28px);line-height:1.42;text-align:left;display:inline-block}.poem p{margin:0 0 1.15em}.poem strong{font-weight:600;color:var(--rose)}</style>
 </head>
 <body>
 
@@ -49,7 +50,8 @@ button:active{transform:scale(.97)}
  <div class="card">
   <p>Du erinnerst dich vielleicht an den letzten.</p>
   <p>Damals wollte ein äußerst mysteriöser Barkeeper dir seine Nummer nicht einfach wie ein normaler Mensch geben.</p>
-  <p>Stattdessen bekamst du den <b>exklusiven WhatsApp-QR-Code.</b></p>
+  <p>Stattdessen bekamst du den</p>
+  <h1>exklusiven WhatsApp-QR-Code.</h1>
   <button onclick="next()">Natürlich</button>
  </div>
 </section>
@@ -58,16 +60,16 @@ button:active{transform:scale(.97)}
  <div class="card">
   <img src="besonders.png" alt="Zwei kuschelnde Otter">
   <p class="special">Weil du etwas Besonderes bist.</p>
-  <p>Etwas ganz Besonderes.</p>
+  <p><b>Etwas Besonderes.</b></p>
+  <p style="font-size:clamp(30px,9vw,48px);font-weight:800">Sooo besonders.</p>
   <p><b>Nicht so wie die anderen Frauen.</b></p>
-  <p class="small">Zumindest wurde dir das so erzählt.</p>
   <button id="teaseBtn" onclick="tease()">Weiter</button>
  </div>
 </section>
 
 <section class="screen">
  <div class="card">
-  <img src="sideeye.png" alt="Side-Eye-Otter">
+  <img src="bist-du-dumm.png" alt="Zwei Otter schauen sich skeptisch an">
   <h1>Du bist aber auch leicht zu beschäftigen.</h1>
   <p class="small">Okay, jetzt darfst du wirklich weiter.</p>
   <button onclick="next()">Na endlich</button>
@@ -76,7 +78,7 @@ button:active{transform:scale(.97)}
 
 <section class="screen">
  <div class="card">
-  <img src="kuscheln.png" alt="Zwei Otter kuscheln">
+  <img src="kuscheln-neu.png" alt="Zwei Otter kuscheln">
   <p>Okay …</p>
   <h1>Vielleicht bist du tatsächlich etwas ganz Besonderes.</h1>
   <button onclick="next()">Weiter</button>
@@ -85,10 +87,10 @@ button:active{transform:scale(.97)}
 
 <section class="screen">
  <div class="card">
-  <img src="kuscheln.png" alt="Zwei Otter kuscheln">
+  <img src="kuscheln-alt.png" alt="Zwei Otter kuscheln">
   <h1>Aber das meine ich diesmal ernst.</h1>
   <p>Ich bin ziemlich froh, dass du damals diesen bescheuerten QR-Code gescannt hast.</p>
-  <p class="special">Te quiero mucho, mucho, mucho. <span class="heart">♥</span></p>
+  <p class="spanish">Te quiero mucho,<br>mucho, mucho. ♥</p>
   <button onclick="next()">Weiter</button>
  </div>
 </section>
@@ -117,15 +119,38 @@ button:active{transform:scale(.97)}
  </div>
 </section>
 
-<section class="screen">
- <div class="card">
-  <img src="kuscheln.png" alt="Zwei kuschelnde Otter">
-  <h1>Feliz cumpleaños, princesa. 👑🦦</h1>
-  <p>Das richtige Geschenk kommt noch.</p>
-  <p class="small">Hier kommt später deine persönliche Abschlussnachricht hin.</p>
-  <p class="heart">♥</p>
- </div>
-</section>
+<section class="screen"><div class="card">
+<img src="kuscheln-neu.png" alt="Zwei kuschelnde Otter">
+<h1>Feliz cumpleaños, princesa. 👑🦦</h1>
+<p>Das richtige Geschenk kommt noch.</p>
+<button onclick="next()">Noch eine Sache …</button>
+</div></section>
+
+<section class="screen"><div class="card">
+<p class="poem-intro">Ein kleines Gedicht, das zeig ich dir,<br>
+von Gefühlen und solchen Dingen,<br>
+die auf Deutsch nur schwer zu Papier zu bringen.<br>
+Drum hauch ich diese Worte in die Nacht<br>
+und hoffe, dass in dir etwas erwacht.</p>
+<button onclick="next()">Weiter</button>
+</div></section>
+
+<section class="screen"><div class="card">
+<div class="poem">
+<p><strong>Es ist Nacht,</strong><br>
+und mein Herz kommt zu dir,<br>
+hält’s nicht aus,<br>
+hält’s nicht aus mehr bei mir.</p>
+<p>Legt sich dir auf die Brust,<br>
+wie ein Stein,<br>
+sinkt hinein,<br>
+zu dem deinen hinein.</p>
+<p>Dort erst,<br>
+dort erst kommt es zur Ruh,<br>
+liegt am Grund<br>
+seines ewigen Du.</p>
+</div>
+</div></section>
 
 <script>
 const screens=[...document.querySelectorAll('.screen')];
